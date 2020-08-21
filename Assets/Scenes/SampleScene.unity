@@ -152,10 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 1, y: 20}
-  leftUpCorner: {x: -1.1510509, y: -10.550078, z: 0}
-  rightUpCorner: {x: -1.1180702, y: -11.549535, z: 0}
-  leftDownCorner: {x: 18.83807, y: -9.890466, z: 0}
-  rightDownCorner: {x: 18.871052, y: -10.889922, z: 0}
+  bouncess: 0.4
+  enteredBalls: []
 --- !u!212 &282685906
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -334,10 +332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 1, y: 15}
-  leftUpCorner: {x: -16.573069, y: 4.992227, z: 0}
-  rightUpCorner: {x: -17.101507, y: 5.8411984, z: 0}
-  leftDownCorner: {x: -3.8384929, y: 12.918801, z: 0}
-  rightDownCorner: {x: -4.3669314, y: 13.767774, z: 0}
+  bouncess: 0.4
+  enteredBalls: []
 --- !u!212 &799809847
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -433,10 +429,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 1, y: 32}
-  leftUpCorner: {x: -17.045368, y: 9.116074, z: 0}
-  rightUpCorner: {x: -17.784058, y: 8.44203, z: 0}
-  leftDownCorner: {x: 4.524058, y: -14.52203, z: 0}
-  rightDownCorner: {x: 3.7853673, y: -15.196074, z: 0}
+  bouncess: 0.4
+  enteredBalls: []
 --- !u!212 &1469915172
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -596,10 +590,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 1, y: 20}
-  leftUpCorner: {x: 16.36, y: 9.47, z: 0}
-  rightUpCorner: {x: 17.36, y: 9.47, z: 0}
-  leftDownCorner: {x: 16.36, y: -10.53, z: 0}
-  rightDownCorner: {x: 17.36, y: -10.53, z: 0}
+  bouncess: 0.4
+  enteredBalls: []
 --- !u!1 &1920852317
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,9 +622,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f016025eaf31084e8b55ab289d8c9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useGravity: 1
+  gravityScale: 1
   velocity: {x: 0, y: 0}
   mouseImpulsePower: 20
-  r: 0.5
+  radius: 0.5
 --- !u!212 &1920852319
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -691,7 +685,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920852317}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.12, y: 6.59, z: 0}
+  m_LocalPosition: {x: -11.87, y: 6.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -728,10 +722,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 1, y: 30}
-  leftUpCorner: {x: -9.578732, y: 11.192271, z: 0}
-  rightUpCorner: {x: -9.409727, y: 12.177886, z: 0}
-  leftDownCorner: {x: 19.989727, y: 6.122113, z: 0}
-  rightDownCorner: {x: 20.158733, y: 7.107728, z: 0}
+  bouncess: 0.4
+  enteredBalls: []
 --- !u!212 &2066806079
 SpriteRenderer:
   m_ObjectHideFlags: 0
