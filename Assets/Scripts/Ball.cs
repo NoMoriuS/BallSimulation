@@ -19,11 +19,10 @@ public class Ball : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = Vector2.Lerp(transform.position, transform.position + new Vector3(velocity.x, velocity.y, 0), 1 * Time.fixedDeltaTime);
-        
-
         if (useGravity)
             velocity += gravity * gravityScale * Time.fixedDeltaTime;
+
+        transform.position += new Vector3(velocity.x, velocity.y, 0) * Time.fixedDeltaTime;
     }
 
     private void Update()

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 {
     public Vector2 size;
-    public float bouncess = 0.4f;
+    public float bouncess;
     public List<Ball> enteredBalls;
     Vector3 topLimit;
     Vector3 downLimit;
@@ -25,16 +25,16 @@ public class Wall : MonoBehaviour
     {
         foreach (var item in balls)
         {
-            if (!enteredBalls.Contains(item))
-            {
+            //if (!enteredBalls.Contains(item))
+            //{
                 if (IsTouchWall(item))
                     OnBallEnter(item);
-            }
-            else
-            {
-                if (!IsTouchWall(item))
-                    enteredBalls.Remove(item);
-            }
+            //}
+            //else
+            //{
+            //    if (!IsTouchWall(item))
+            //        enteredBalls.Remove(item);
+            //}
         }
     }
 
@@ -62,20 +62,21 @@ public class Wall : MonoBehaviour
 
     void BounceOffWall(Ball ball)
     {
-        Debug.DrawLine(ball.transform.position, ball.transform.position + transform.right, Color.green, 100000);
-        ball.velocity = Vector2.Reflect(ball.velocity, transform.right) * bouncess;
+        Debug.DrawLine(ball.transform.position, ball.transform.position + transform.up, Color.green, 100000);
+        //ball.velocity = Vector2.Reflect(ball.velocity, transform.right) * bouncess;
+        var newVelocity = ball.velocity - 2 * transform.up * ball.velocity * transform.up; //reflect
+        ball.velocity = newVelocity * bouncess;
+        if (ball.radius + size.y / 2f > ball.transform.position.y) ball.transform.position = new Vector2(ball.transform.position.x, transform.position.y + ball.radius + size.y / 2f);
     }
 
     bool IsTouchWall(Ball ball)
     {
         Transform ballTrans = ball.transform;
 
-        Debug.DrawLine(topLimit, ballTrans.position + (ball.radius + size.x / 2f) * transform.right);
-        Debug.DrawLine(downLimit, ballTrans.position + (ball.radius + size.x / 2f) * transform.right);
+        //Debug.DrawLine(topLimit, ballTrans.position + (ball.radius + size.x / 2f) * transform.right);
+        //Debug.DrawLine(downLimit, ballTrans.position + (ball.radius + size.x / 2f) * transform.right);
 
-        var limitsToPlayerDist = Vector2.Distance(topLimit, ballTrans.position + (ball.radius + size.x / 2f) * transform.right) + Vector2.Distance(downLimit, ballTrans.position + (ball.radius + size.x / 2f) * transform.right);
-
-        if (Mathf.Abs(size.y - limitsToPlayerDist) < 0.01f)
+        if (ballTrans.position.y < transform.position.y + ball.radius + size.y /2f)
             return true;
         else
             return false;
