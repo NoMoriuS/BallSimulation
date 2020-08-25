@@ -10,10 +10,13 @@ public class Wall : MonoBehaviour
     public List<Ball> enteredBalls;
     Vector3 topLimit;
     Vector3 downLimit;
+    Vector3 rightLimit;
+    Vector3 leftLimit;
     Vector3 leftUpCorner;
     Vector3 rightUpCorner;
     Vector3 leftDownCorner;
     Vector3 rightDownCorner;
+    float distance;
     Ball[] balls;
 
     private void Start()
@@ -32,7 +35,7 @@ public class Wall : MonoBehaviour
             //}
             //else
             //{
-            //    if (!IsTouchWall(item))
+            //   if (!IsTouchWall(item))
             //        enteredBalls.Remove(item);
             //}
         }
@@ -42,6 +45,9 @@ public class Wall : MonoBehaviour
     {
         topLimit = transform.position + transform.up * size.y / 2f;
         downLimit = transform.position - transform.up * size.y / 2f;
+        rightLimit = transform.position + transform.right * size.x / 2f;
+        leftLimit = transform.position - transform.right * size.x / 2f;
+
 
         leftUpCorner = topLimit - transform.right * size.x / 2f;
         rightUpCorner = topLimit + transform.right * size.x / 2f;
@@ -56,27 +62,36 @@ public class Wall : MonoBehaviour
 
     void OnBallEnter(Ball ball)
     {
-        enteredBalls.Add(ball);
+        //enteredBalls.Add(ball);
         BounceOffWall(ball);
     }
 
     void BounceOffWall(Ball ball)
     {
-        Debug.DrawLine(ball.transform.position, ball.transform.position + transform.up, Color.green, 100000);
-        //ball.velocity = Vector2.Reflect(ball.velocity, transform.right) * bouncess;
-        var newVelocity = ball.velocity - 2 * transform.up * ball.velocity * transform.up; //reflect
+        //ball.velocity = Vector2.Reflect(ball.velocity, transform.up) * bouncess;
+        var newVelocity = ball.velocity - 2 * Vector2.Dot(transform.up, ball.velocity) * (Vector2)transform.up; //reflect
         ball.velocity = newVelocity * bouncess;
-        if (ball.radius + size.y / 2f > ball.transform.position.y) ball.transform.position = new Vector2(ball.transform.position.x, transform.position.y + ball.radius + size.y / 2f);
+
+        if (ball.radius + size.y / 2f > distance)
+            ball.transform.position += transform.up * (ball.radius + size.y / 2f - distance);
+
+        Debug.Log("Touch");
     }
 
     bool IsTouchWall(Ball ball)
     {
         Transform ballTrans = ball.transform;
 
-        //Debug.DrawLine(topLimit, ballTrans.position + (ball.radius + size.x / 2f) * transform.right);
-        //Debug.DrawLine(downLimit, ballTrans.position + (ball.radius + size.x / 2f) * transform.right);
+        Debug.DrawLine(ballTrans.position, leftLimit, Color.red);
+        Debug.DrawLine(leftLimit, leftUpCorner, Color.red);
 
-        if (ballTrans.position.y < transform.position.y + ball.radius + size.y /2f)
+        var toBall = ballTrans.position - leftLimit;
+        var main = rightLimit - leftLimit;
+        var angle = Vector2.Angle(toBall.normalized, main.normalized);
+        var c = (ballTrans.position - leftUpCorner).magnitude;
+        distance = Mathf.Sin(angle * Mathf.Deg2Rad) * c;
+
+        if (distance < ball.radius + size.y / 2f && ball.velocity != Vector2.zero)  
             return true;
         else
             return false;

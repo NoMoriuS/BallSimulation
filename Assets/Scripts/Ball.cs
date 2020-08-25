@@ -17,12 +17,18 @@ public class Ball : MonoBehaviour
         gravity = Physics2D.gravity;
     }
 
-    private void FixedUpdate()
+    private void Awake()
     {
         if (useGravity)
             velocity += gravity * gravityScale * Time.fixedDeltaTime;
+    }
 
+    private void FixedUpdate()
+    {
         transform.position += new Vector3(velocity.x, velocity.y, 0) * Time.fixedDeltaTime;
+
+        if (useGravity)
+            velocity += gravity * gravityScale * Time.fixedDeltaTime;
     }
 
     private void Update()
