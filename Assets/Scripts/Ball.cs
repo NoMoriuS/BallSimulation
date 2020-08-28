@@ -9,12 +9,17 @@ public class Ball : MonoBehaviour
     public Vector2 velocity;
     public float mouseImpulsePower;
     public float radius;
+    public float mass;
     float speed;
     Vector2 gravity;
 
     private void Start()
     {
         gravity = Physics2D.gravity;
+
+        radius = Random.Range(0.5f, 1.5f);
+        mass = radius * 2;
+        transform.localScale = Vector2.one * radius * 2;
     }
 
     private void Awake()
